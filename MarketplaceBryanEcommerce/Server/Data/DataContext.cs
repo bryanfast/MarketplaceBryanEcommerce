@@ -3,7 +3,7 @@ namespace MarketplaceBryanEcommerce.Server.Data
 {
     public class DataContext:DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options):base(options)   
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
             
         }
@@ -23,7 +23,7 @@ namespace MarketplaceBryanEcommerce.Server.Data
                  Id = 2,
                  Title = "Ready Player One (película)",
                  Description = "Ready Player One (titulada Ready Player One: comienza el juego en Hispanoamérica) es una película estadounidense de acción y ciencia ficción de 2018, producida y dirigida por Steven Spielberg, escrita por Zak Penn y Ernest Cline y basada en la novela homónima de Cline. La película está protagonizada por Tye Sheridan, Olivia Cooke, Ben Mendelsohn, T. J. Miller, Simon Pegg y Mark Rylance.",
-                 ImageUrl = "https://upload.wikimedia.org/wikipedia/en/a/a4/Ready_Player_One_cover.jpg",
+                 ImageUrl = "https://pics.filmaffinity.com/Ready_Player_One-508487059-large.jpg",
                  Price = 7.99m,
              },
              new Product
