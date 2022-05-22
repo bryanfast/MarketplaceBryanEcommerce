@@ -1,4 +1,4 @@
 # MarketplaceBryanEcommerce
-Página pra la Prueba de Comercio Electronico
+Página para la Prueba de Comercio Electronico
 
 Desarrollado por Bryan
