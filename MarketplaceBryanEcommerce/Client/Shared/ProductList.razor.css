@@ -1,6 +1,7 @@
 ﻿.media-img{
     max-height:200px;
     max-width:200px;
+    width:150px;
     border-radius:6px;
     margin-bottom:10px;
     transition:transform .2s;
@@ -9,14 +10,6 @@
         transform:scale(1.1);
     }
 
-.media{
-    display:flex;
-    align-items:flex-start;
-}
-
-.media-body{
-    flex:1;
-}
 .media-img-wrapper{
     width:200px;
     text-align:center;

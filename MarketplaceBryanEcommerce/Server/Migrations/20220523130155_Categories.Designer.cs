@@ -3,6 +3,7 @@ using MarketplaceBryanEcommerce.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketplaceBryanEcommerce.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220523130155_Categories")]
+    partial class Categories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,18 +123,9 @@ namespace MarketplaceBryanEcommerce.Server.Migrations
                             Id = 4,
                             CategoryId = 2,
                             Description = "Ricas palomitas de maiz, para que disfrutes la peli que compraste",
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/9/9b/Patlam%C4%B1%C5%9F_m%C4%B1s%C4%B1r.JPG",
+                            ImageUrl = "https://img.freepik.com/vector-gratis/diseno-cine_24911-31142.jpg?w=2000",
                             Price = 2.00m,
                             Title = "Palomitas"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 2,
-                            Description = "Coca-Cola (conocida comúnmente como Coca en muchos países hispanohablantes; en inglés también conocida como Coke) es una bebida azucarada gaseosa vendida a nivel mundial en tiendas, restaurantes y máquinas expendedoras en más de doscientos países o territorios.",
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/15-09-26-RalfR-WLC-0098.jpg/338px-15-09-26-RalfR-WLC-0098.jpg?20150926234117",
-                            Price = 1.00m,
-                            Title = "Cocalcola"
                         });
                 });
 
