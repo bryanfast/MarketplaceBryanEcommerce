@@ -1,8 +1,10 @@
 global using MarketplaceBryanEcommerce.Shared;
 global using Microsoft.EntityFrameworkCore;
 global using MarketplaceBryanEcommerce.Server.Data;
+global using MarketplaceBryanEcommerce.Server.Services.CategoryService;
 global using MarketplaceBryanEcommerce.Server.Services.ProductService;
 using Microsoft.AspNetCore.ResponseCompression;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +28,7 @@ builder.Services.AddSwaggerGen();
 
 //Owner Services DB
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

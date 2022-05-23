@@ -1,5 +1,6 @@
 global using MarketplaceBryanEcommerce.Shared;
 global using System.Net.Http.Json;
+global using MarketplaceBryanEcommerce.Client.Services.CategoryService;
 global using MarketplaceBryanEcommerce.Client.Services.ProductService;
 using MarketplaceBryanEcommerce.Client;
 using Microsoft.AspNetCore.Components.Web;
@@ -11,5 +12,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 await builder.Build().RunAsync();

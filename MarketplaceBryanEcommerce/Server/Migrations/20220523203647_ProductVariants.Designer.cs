@@ -3,6 +3,7 @@ using MarketplaceBryanEcommerce.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketplaceBryanEcommerce.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220523203647_ProductVariants")]
+    partial class ProductVariants
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,21 +155,26 @@ namespace MarketplaceBryanEcommerce.Server.Migrations
                         new
                         {
                             Id = 2,
-                            Name = "HD"
+                            Name = "E-book"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "FHD"
+                            Name = "Libro"
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Dulces"
+                            Name = "Audiolibro"
                         },
                         new
                         {
                             Id = 5,
+                            Name = "Dulces"
+                        },
+                        new
+                        {
+                            Id = 6,
                             Name = "Saladas"
                         });
                 });
@@ -197,50 +204,8 @@ namespace MarketplaceBryanEcommerce.Server.Migrations
                         {
                             ProductId = 1,
                             ProductTypeId = 2,
-                            OriginalPrice = 99.99m,
-                            Price = 99.99m
-                        },
-                        new
-                        {
-                            ProductId = 1,
-                            ProductTypeId = 3,
-                            OriginalPrice = 999.99m,
-                            Price = 999.99m
-                        },
-                        new
-                        {
-                            ProductId = 2,
-                            ProductTypeId = 2,
                             OriginalPrice = 19.99m,
                             Price = 9.99m
-                        },
-                        new
-                        {
-                            ProductId = 3,
-                            ProductTypeId = 2,
-                            OriginalPrice = 19.99m,
-                            Price = 9.99m
-                        },
-                        new
-                        {
-                            ProductId = 4,
-                            ProductTypeId = 2,
-                            OriginalPrice = 19.99m,
-                            Price = 9.99m
-                        },
-                        new
-                        {
-                            ProductId = 5,
-                            ProductTypeId = 4,
-                            OriginalPrice = 19.99m,
-                            Price = 9.99m
-                        },
-                        new
-                        {
-                            ProductId = 5,
-                            ProductTypeId = 5,
-                            OriginalPrice = 19.99m,
-                            Price = 10.00m
                         });
                 });
 
@@ -258,7 +223,7 @@ namespace MarketplaceBryanEcommerce.Server.Migrations
             modelBuilder.Entity("MarketplaceBryanEcommerce.Shared.ProductVariant", b =>
                 {
                     b.HasOne("MarketplaceBryanEcommerce.Shared.Product", "Product")
-                        .WithMany("Variants")
+                        .WithMany("Variant")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -276,7 +241,7 @@ namespace MarketplaceBryanEcommerce.Server.Migrations
 
             modelBuilder.Entity("MarketplaceBryanEcommerce.Shared.Product", b =>
                 {
-                    b.Navigation("Variants");
+                    b.Navigation("Variant");
                 });
 #pragma warning restore 612, 618
         }
