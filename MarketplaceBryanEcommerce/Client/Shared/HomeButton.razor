@@ -1,0 +1,11 @@
+﻿@inject NavigationManager NavigationManager
+<button @onlclick="GoToHome"
+        class="btn btn-outline-primary home-button">
+        Inicio
+</button>
+@code {
+    private void GoToHome()
+    {
+        NavigationManager.NavigateTo("");
+    }
+}

@@ -90,7 +90,8 @@ namespace MarketplaceBryanEcommerce.Server.Data
             {
                 Id = 1,
                 CategoryId=1,
-                Title = "Life of Bryan",
+                Featured=true,
+                Title = "Life of Brian",
                 Description = "La vida de Brian (título original: Life of Brian; 1979) es el tercer largometraje del grupo de comedia inglés Monty Python. Trata la historia de un judío que nace el mismo día que Jesucristo y ya de adulto es varias veces confundido con él. Con canciones clásicas de los Python como «Always Look On The Bright Side Of Life» (Mira siempre el lado positivo de la vida), cantada por un coro de crucificados, la película es, junto con Los caballeros de la mesa cuadrada y El sentido de la vida una de las más exitosas de Monty Python.",
                 ImageUrl = "https://upload.wikimedia.org/wikipedia/en/thumb/1/18/Lifeofbrianfilmposter.jpg/220px-Lifeofbrianfilmposter.jpg",
             },
@@ -98,6 +99,7 @@ namespace MarketplaceBryanEcommerce.Server.Data
              {
                  Id = 2,
                  CategoryId = 1,
+                 Featured=true,
                  Title = "Ready Player One (película)",
                  Description = "Ready Player One (titulada Ready Player One: comienza el juego en Hispanoamérica) es una película estadounidense de acción y ciencia ficción de 2018, producida y dirigida por Steven Spielberg, escrita por Zak Penn y Ernest Cline y basada en la novela homónima de Cline. La película está protagonizada por Tye Sheridan, Olivia Cooke, Ben Mendelsohn, T. J. Miller, Simon Pegg y Mark Rylance.",
                  ImageUrl = "https://pics.filmaffinity.com/Ready_Player_One-508487059-large.jpg",

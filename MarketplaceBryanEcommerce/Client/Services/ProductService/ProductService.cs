@@ -12,6 +12,8 @@ namespace MarketplaceBryanEcommerce.Client.Services.ProductService
         }
         public event Action ProductsChanged;
         public List<Product> Products { get; set; } = new List<Product>();
+        public string Message { get; set; }= "Cargando Productos";
+
         public async  Task<ServiceResponse<Product>> GetProduct(int productId)
         {
             var result = await _http.GetFromJsonAsync<ServiceResponse<Product>>($"api/product/{productId}");
@@ -27,6 +29,23 @@ namespace MarketplaceBryanEcommerce.Client.Services.ProductService
             if (result != null && result.Data != null)
                 Products = result.Data;
             ProductsChanged.Invoke();
+        }
+
+        public async Task SearchProducts(string searchText)
+        {
+            var result = await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>($"api/product/search/{searchText}");
+            if(result!=null && result.Data != null)
+            {
+                Products = result.Data;
+            }
+            if (Products.Count == 0) Message = "No se encontraron productos";
+            ProductsChanged?.Invoke();
+        }
+
+        public async Task<List<string>> GetSearchProductSuggestion(string searchText)
+        {
+            var result = await _http.GetFromJsonAsync<ServiceResponse<List<string>>>($"api/product/searchsuggestions/{searchText}");
+            return result!.Data!;
         }
     }
 }
