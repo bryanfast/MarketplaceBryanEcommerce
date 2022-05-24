@@ -48,5 +48,51 @@
             };
             return response;
         }
+        // Implementacion de Busquedas
+        public async Task<ServiceResponse<List<string>>> GetSearchProductSuggestion(string searchText)
+        {
+            var response = await SearchProductsFunction(searchText);
+            List<string> result = new List<string>();
+            foreach(var product in response)
+            {
+                    if (product.Title.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                    {
+                        result.Add(product.Title);
+                    }
+                if (product.Description != null)
+                {
+                    var punctuation = product.Description.Where(char.IsPunctuation)
+                        .Distinct().ToArray();
+                    var words = product.Description.Split()
+                        .Select(s => s.Trim(punctuation));
+                    foreach(var word in words)
+                    {
+                        if(word.Contains(searchText,StringComparison.OrdinalIgnoreCase)&& !result.Contains(word)){
+                            result.Add(word);
+                        }
+                    }
+                }
+            }
+            return new ServiceResponse<List<String>> { Data=result };
+        }
+
+        public async Task<ServiceResponse<List<Product>>> SearchProducts(string searchText)
+        {
+            var response = new ServiceResponse<List<Product>>
+            {
+                Data=await SearchProductsFunction(searchText)
+            };
+            return response;
+        }
+
+        private async Task<List<Product>> SearchProductsFunction(string searchText)
+        {
+            return await _context.Products
+                    .Where(p => p.Title.ToLower().Contains(searchText.ToLower())
+                    ||
+                    p.Description.ToLower().Contains(searchText.ToLower()))
+                    .Include(p => p.Variants)
+                    .ToListAsync();
+        }
     }
 }

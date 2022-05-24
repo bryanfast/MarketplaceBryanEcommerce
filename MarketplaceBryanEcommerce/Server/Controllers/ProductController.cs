@@ -35,5 +35,21 @@ namespace MarketplaceBryanEcommerce.Server.Controllers
             var result = await _productService.GetProductsByCategory(categoryUrl);
             return Ok(result);
         }
+
+        //Busqueda de productos en el titulo y la descripción
+        [HttpGet("search/{searchText}")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> SearchProducts(string searchText)
+        {
+            var result = await _productService.SearchProducts(searchText);
+            return Ok(result);
+        }
+
+        //Busqueda de productos en el titulo y la descripción para las sugerencias
+        [HttpGet("searchsuggestions/{searchText}")]
+        public async Task<ActionResult<ServiceResponse<List<string>>>> SearchProductSuggestion(string searchText)
+        {
+            var result = await _productService.GetSearchProductSuggestion(searchText);
+            return Ok(result);
+        }
     }
 }
