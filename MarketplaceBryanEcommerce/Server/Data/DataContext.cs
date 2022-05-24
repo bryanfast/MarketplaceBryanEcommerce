@@ -18,7 +18,8 @@ namespace MarketplaceBryanEcommerce.Server.Data
                 new ProductType { Id = 2, Name = "HD" },
                 new ProductType { Id = 3, Name = "FHD" },
                 new ProductType { Id = 4, Name = "Dulces" },
-                new ProductType { Id = 5, Name = "Saladas" }
+                new ProductType { Id = 5, Name = "Saladas" },
+                new ProductType { Id = 6, Name = "Bebidas" }
                 );
 
             modelBuilder.Entity<ProductVariant>().HasData(
@@ -27,14 +28,14 @@ namespace MarketplaceBryanEcommerce.Server.Data
                     ProductId=1,
                     ProductTypeId=2,
                     Price=99.99m,
-                    OriginalPrice=99.99m
+                    OriginalPrice=200.00m
                 },
                 new ProductVariant
                 {
                     ProductId = 1,
                     ProductTypeId = 3,
                     Price = 999.99m,
-                    OriginalPrice = 999.99m
+                    OriginalPrice = 2000.00m
                 },
                 new ProductVariant
                 {
@@ -53,26 +54,24 @@ namespace MarketplaceBryanEcommerce.Server.Data
                 new ProductVariant
                 {
                     ProductId = 4,
-                    ProductTypeId = 2,
-                    Price = 9.99m,
-                    OriginalPrice = 19.99m
-                },
-                new ProductVariant
-                {
-                    ProductId = 5,
                     ProductTypeId = 4,
                     Price = 9.99m,
                     OriginalPrice = 19.99m
                 },
                 new ProductVariant
                 {
-                    ProductId = 5,
+                    ProductId = 4,
                     ProductTypeId = 5,
                     Price = 10.00m,
                     OriginalPrice = 19.99m
-                }
-
-                );
+                },
+                new ProductVariant
+                {
+                    ProductId = 5,
+                    ProductTypeId = 6,
+                    Price = 9.99m,
+                    OriginalPrice = 19.99m
+                });
             modelBuilder.Entity<Category>().HasData(
              new Category
              {
