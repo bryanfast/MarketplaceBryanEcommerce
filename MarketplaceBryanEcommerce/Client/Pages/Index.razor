@@ -3,9 +3,14 @@
 @page "/{categoryUrl}"
 @inject IProductService ProductService
 <PageTitle>MarketPlace Bryan</PageTitle>
-<h1>Bienvenido a la Tienda numero 1 de Colombia!</h1>
+<center><h1>Bienvenido a la Tienda numero 1 de Colombia!</h1></center>
 
-<ProductList></ProductList>
+@if(SearchText==null && CategoryUrl == null)
+{
+    <FeaturedProducts/>
+}
+<ProductList/>
+
 
 
 @code{
