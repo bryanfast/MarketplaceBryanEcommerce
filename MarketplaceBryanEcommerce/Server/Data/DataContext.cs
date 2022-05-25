@@ -99,7 +99,6 @@ namespace MarketplaceBryanEcommerce.Server.Data
              {
                  Id = 2,
                  CategoryId = 1,
-                 Featured=true,
                  Title = "Ready Player One (película)",
                  Description = "Ready Player One (titulada Ready Player One: comienza el juego en Hispanoamérica) es una película estadounidense de acción y ciencia ficción de 2018, producida y dirigida por Steven Spielberg, escrita por Zak Penn y Ernest Cline y basada en la novela homónima de Cline. La película está protagonizada por Tye Sheridan, Olivia Cooke, Ben Mendelsohn, T. J. Miller, Simon Pegg y Mark Rylance.",
                  ImageUrl = "https://pics.filmaffinity.com/Ready_Player_One-508487059-large.jpg",
@@ -108,6 +107,7 @@ namespace MarketplaceBryanEcommerce.Server.Data
              {
                  Id = 3,
                  CategoryId = 1,
+                 Featured = true,
                  Title = "El laberinto del fauno",
                  Description = "El laberinto del fauno es una película hispano-mexicana2​ de los géneros drama y fantasía oscura, escrita, producida y dirigida por Guillermo del Toro. Fue distribuida por Warner Bros Pictures España y estrenada el 11 de octubre de 2006 en España, y una semana y media después se estrenó en México. La película fue seleccionada por la Academia Mexicana de Artes y Ciencias Cinematográficas para representar a México en los premios Óscar, en la categoría de Mejor Película de Lengua Extranjera (Best Foreign Language Film). Fue la película de mejores críticas a nivel mundial durante 2006, también la película con más candidaturas a los premios Óscar entre las que no son de habla inglesa. También fue ganadora de 11 premios Ariel, destacado a la de mejor película y director.",
                  ImageUrl = "https://upload.wikimedia.org/wikipedia/en/6/67/Pan%27s_Labyrinth.jpg",
