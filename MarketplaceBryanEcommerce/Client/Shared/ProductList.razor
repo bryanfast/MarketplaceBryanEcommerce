@@ -28,7 +28,7 @@ else
     }
     </ul>
 }
-
+<center>
 @for (var i = 1; i <= ProductService.PageCount; i++)
 {
     <a class="btn 
@@ -36,7 +36,7 @@ else
         page-selection"
         href="/search/@ProductService.LastSearch/@i">@i</a>
 }
-
+</center>
 @code {
     protected override void OnInitialized()
     {
