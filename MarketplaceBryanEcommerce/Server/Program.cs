@@ -4,6 +4,7 @@ global using MarketplaceBryanEcommerce.Server.Data;
 global using MarketplaceBryanEcommerce.Server.Services.CartService;
 global using MarketplaceBryanEcommerce.Server.Services.CategoryService;
 global using MarketplaceBryanEcommerce.Server.Services.ProductService;
+global using MarketplaceBryanEcommerce.Server.Services.AuthService;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 var app = builder.Build();
 
 //Swagger

@@ -1,0 +1,34 @@
+﻿@page "/login"
+<PageTitle>Login</PageTitle>
+<center><h3>Ingresar</h3></center>
+<EditForm Model="user" OnValidSubmit="HandleLogin">
+    <DataAnnotationsValidator/>
+    <div class="mb-3">
+        <label for="email">Email</label>
+        <InputText id="email" @bind-Value="user.Email" class="form-control" ></InputText>
+        <ValidationMessage For="@(()=>user.Email)"/>
+    </div>
+    <div class="mb-3">
+        <label for="password">Contraseña</label>
+        <InputText id="password" @bind-Value="user.Password" class="form-control" type="password"></InputText>
+        <ValidationMessage For="@(()=>user.Password)"/>
+    </div>
+    <center><button type="submit" class="btn btn-primary">Ingresar</button></center>
+    <br/>
+    <br/>
+    <div class="@messageCssClass">
+        <span>@message</span>
+    </div>
+    <br/>
+</EditForm>
+
+
+@code {
+    string message = string.Empty;
+    string messageCssClass = string.Empty;
+    private UserLogin user = new UserLogin();
+    private async Task HandleLogin()
+    {
+        Console.WriteLine("Usuario Logueado!");
+    }
+}

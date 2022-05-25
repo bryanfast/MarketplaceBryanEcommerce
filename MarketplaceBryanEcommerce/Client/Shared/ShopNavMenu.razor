@@ -1,7 +1,7 @@
 ﻿@inject ICategoryService CategoryService
 <div class="top-row ps-3 navbar navbar-dark navbar-toggler-wrapper">
     <div class="container-fluid">
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu" @onfocusout="HideNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
@@ -38,6 +38,12 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+    private async Task HideNavMenu()
+    {
+        await Task.Delay(200);
+        collapseNavMenu = true;
+
     }
 
     protected override async Task OnInitializedAsync()
