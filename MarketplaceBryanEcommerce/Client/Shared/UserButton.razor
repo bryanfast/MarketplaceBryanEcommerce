@@ -13,13 +13,10 @@
                 <button class="dropdown-item" @onclick="Logout">Cerrar Sesion</button>
             </Authorized>
             <NotAuthorized>
-                <a href="/login" class="dropdown-item">Ingresar</a>
+                <a href="/login?returnUrl=@NavigationManager.ToBaseRelativePath(NavigationManager.Uri)" class="dropdown-item">Ingresar</a>
                 <a href="/register" class="dropdown-item">Registrar</a>
             </NotAuthorized>
         </AuthorizeView>
- 
-        
-        
         
     </div>
 </div>
