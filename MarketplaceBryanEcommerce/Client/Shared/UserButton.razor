@@ -8,9 +8,19 @@
         <i class="oi oi-person"></i>
     </button>
     <div class="dropdown-menu dropdown-menu-rigth @UserMenuCssClass">
-        <a href="/login" class="dropdown-item">Ingresar</a>
-        <a href="/register" class="dropdown-item">Registrar</a>
-        <a href="/register" class="dropdown-item">Cerrar Sesion</a>
+        <AuthorizeView>
+            <Authorized>
+                <button class="dropdown-item" @onclick="Logout">Cerrar Sesion</button>
+            </Authorized>
+            <NotAuthorized>
+                <a href="/login" class="dropdown-item">Ingresar</a>
+                <a href="/register" class="dropdown-item">Registrar</a>
+            </NotAuthorized>
+        </AuthorizeView>
+ 
+        
+        
+        
     </div>
 </div>
 
