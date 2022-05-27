@@ -1,7 +1,15 @@
 ﻿<Router AppAssembly="@typeof(App).Assembly">
     <Found Context="routeData">
-        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(ShopLayout)" />
-        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(ShopLayout)">
+            <NotAuthorized>
+                <center>
+                    <h3>No se encuentra autorizado para ver este contenido.</h3>
+                    <h5>Para ingresar haga click <a href="/login">aqui</a></h5>
+                    <h5>Sin no tiene una cuenta se puede registrar <a href="/register">aqui</a></h5>
+                </center>
+            </NotAuthorized>
+        </AuthorizeRouteView>
+        <FocusOnNavigate RouteData="@routeData" Selector="h1"/>
     </Found>
     <NotFound>
         <PageTitle>Not found</PageTitle>

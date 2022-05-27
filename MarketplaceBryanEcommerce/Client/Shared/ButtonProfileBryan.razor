@@ -1,0 +1,11 @@
+﻿@inject NavigationManager NavigationManager
+<a href="https://www.linkedin.com/in/bmvingeniero/" target="_blank"  @onclick="GoToProfileBryan"
+        class="btn btn-outline-primary aboutme-button">
+        <i class="oi oi-heart"></i>
+</a>
+@code {
+    private void GoToProfileBryan()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}

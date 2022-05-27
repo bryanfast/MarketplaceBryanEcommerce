@@ -1,0 +1,37 @@
+﻿.container{
+    height:100%;
+    align-content:center;
+}
+.card {
+    height: 350px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 500px;
+    background-color: rgba(0,0,0,0.7) !important;
+}
+
+.card-header {
+    color: white;
+}
+
+.card-body{
+    color: white;
+}
+.card-footer{
+    color:white;
+}
+
+.login_btn {
+    margin:10px;
+    color: black;
+    background-color: #FFC312;
+    width: 100px;
+}
+
+body {
+    background-image: url('https://fondosmil.com/fondo/5086.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+}

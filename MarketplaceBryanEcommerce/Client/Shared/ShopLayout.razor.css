@@ -35,9 +35,8 @@ main {
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
 @media (max-width: 640.98px) {
-    .aboutme:not(.auth) {
+    .aboutme-button:not(.auth) {
         display: none;
     }
 
