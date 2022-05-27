@@ -1,0 +1,27 @@
+﻿.card {
+    height: 300px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 500px;
+    background-color: rgba(0,0,0,0.5);
+}
+.card-header {
+    color: white;
+}
+
+.card-body {
+    color: white;
+}
+
+body {
+    background-image: url('https://img.freepik.com/vector-gratis/silueta-aves-voladoras-bandada-pajaros-marinos-negros-palomas-gaviotas-o-golondrinas-decoracion-negro-aislado-sobre-fondo-blanco-concepto-libertad-vector_176516-1352.jpg?w=2000');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+}
+
+.container {
+    height: 100%;
+    align-content: center;
+}
