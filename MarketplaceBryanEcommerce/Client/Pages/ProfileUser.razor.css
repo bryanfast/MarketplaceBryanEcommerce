@@ -25,3 +25,7 @@ body {
     height: 100%;
     align-content: center;
 }
+.title-profile{
+    margin-top: auto;
+    color:blue;
+}

@@ -5,7 +5,12 @@
 
 @if(ProductService.Products==null|| ProductService.Products.Count == 0)
 {
-    <span>@ProductService.Message</span>
+<center>
+    <div class="spinner-border" role="status">
+      <span class="sr-only"></span>
+    </div>
+    <p>@ProductService.Message</p>
+</center>
 }
 else
 {
