@@ -8,5 +8,6 @@
         Task<List<CartProductResponse>> GetCartProducts();
         Task UdpateQuantity(CartProductResponse product);
         Task RemoveItemCart(int productId, int productTypeId);
+        Task StoreCartItems(bool emptyLoadCart);
     }
 }

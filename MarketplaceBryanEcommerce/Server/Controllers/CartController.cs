@@ -21,5 +21,18 @@ namespace MarketplaceBryanEcommerce.Server.Controllers
             return Ok(result);
 
         }
+
+        [HttpPost]
+        public async Task<ActionResult<ServiceResponse<List<CartProductResponse>>>> StoreCartItems(List<CartItem> cartItems)
+        {
+            var result= await _cartService.StoreCartItems(cartItems);
+            return Ok(result);
+        }
+
+        [HttpPost("count")]
+        public async Task<ActionResult<ServiceResponse<int>>> GetCarItemsCount()
+        {
+            return await _cartService.GetCartItemsCount();
+        }
     }
 }

@@ -8,6 +8,7 @@
         {
             _context = context;
         }
+
         public async Task<ServiceResponse<List<Category>>> GetCategories()
         {
             var response = new ServiceResponse<List<Category>>

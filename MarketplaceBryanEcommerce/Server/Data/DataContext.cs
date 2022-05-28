@@ -1,20 +1,23 @@
 ﻿
 namespace MarketplaceBryanEcommerce.Server.Data
 {
-    public class DataContext:DbContext
+    public class DataContext : DbContext
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-            
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CartItem>().HasKey(
+                ci => new { ci.UserId,ci.ProductId, ci.ProductTypeId }
+                );
             modelBuilder.Entity<ProductVariant>().HasKey(
-                p => new  { p.ProductId,p.ProductTypeId}
+                p => new { p.ProductId, p.ProductTypeId }
                 );
 
             modelBuilder.Entity<ProductType>().HasData(
-                new ProductType { Id=1, Name="Defautl"},
+                new ProductType { Id = 1, Name = "Defautl" },
                 new ProductType { Id = 2, Name = "HD" },
                 new ProductType { Id = 3, Name = "FHD" },
                 new ProductType { Id = 4, Name = "Dulces" },
@@ -25,10 +28,10 @@ namespace MarketplaceBryanEcommerce.Server.Data
             modelBuilder.Entity<ProductVariant>().HasData(
                 new ProductVariant
                 {
-                    ProductId=1,
-                    ProductTypeId=2,
-                    Price=99.99m,
-                    OriginalPrice=200.00m
+                    ProductId = 1,
+                    ProductTypeId = 2,
+                    Price = 99.99m,
+                    OriginalPrice = 200.00m
                 },
                 new ProductVariant
                 {
@@ -75,9 +78,9 @@ namespace MarketplaceBryanEcommerce.Server.Data
             modelBuilder.Entity<Category>().HasData(
              new Category
              {
-                 Id=1,
-                 Name="Peliculas",
-                 Url="peliculas",
+                 Id = 1,
+                 Name = "Peliculas",
+                 Url = "peliculas",
              },
              new Category
              {
@@ -89,8 +92,8 @@ namespace MarketplaceBryanEcommerce.Server.Data
             new Product
             {
                 Id = 1,
-                CategoryId=1,
-                Featured=true,
+                CategoryId = 1,
+                Featured = true,
                 Title = "Life of Brian",
                 Description = "La vida de Brian (título original: Life of Brian; 1979) es el tercer largometraje del grupo de comedia inglés Monty Python. Trata la historia de un judío que nace el mismo día que Jesucristo y ya de adulto es varias veces confundido con él. Con canciones clásicas de los Python como «Always Look On The Bright Side Of Life» (Mira siempre el lado positivo de la vida), cantada por un coro de crucificados, la película es, junto con Los caballeros de la mesa cuadrada y El sentido de la vida una de las más exitosas de Monty Python.",
                 ImageUrl = "https://upload.wikimedia.org/wikipedia/en/thumb/1/18/Lifeofbrianfilmposter.jpg/220px-Lifeofbrianfilmposter.jpg",
@@ -133,7 +136,8 @@ namespace MarketplaceBryanEcommerce.Server.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductType> ProductTypes { get; set; }
-        public DbSet<ProductVariant> ProductVariants{ get; set; }
-        public DbSet<User> Users{ get; set; }
+        public DbSet<ProductVariant> ProductVariants { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
     }
 }
