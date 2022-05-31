@@ -11,7 +11,7 @@
             _httpContextAccessor = httpContextAccessor;
         }
 
-        private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier));
+        private int GetUserId() => int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
         public async Task<ServiceResponse<List<CartProductResponse>>> GetCartProducts(List<CartItem> cartItems)
         {
@@ -56,15 +56,48 @@
             cartItems.ForEach(cartItem => cartItem.UserId = GetUserId());
             _context.CartItems.AddRange(cartItems);
             await _context.SaveChangesAsync();
-            return await GetCartProducts(await _context.CartItems.Where(ci => ci.UserId == GetUserId()).ToListAsync());
+            return await GetDbCartProducts();
         }
 
         public async Task<ServiceResponse<int>> GetCartItemsCount()
         {
-            var count = (await _context.CartItems.Where(ci => ci.UserId == GetUserId()).ToListAsync()).Count;
+            var cartItems =await _context.CartItems.Where(ci => ci.UserId == GetUserId()).ToListAsync();
+            if (cartItems == null)
+            {
+                return new ServiceResponse<int>
+                {
+                    Data = 0,
+                };
+            }
             return new ServiceResponse<int>
             {
-                Data= count,
+                Data= cartItems.Count,
+            };
+        }
+
+        public async Task<ServiceResponse<List<CartProductResponse>>> GetDbCartProducts()
+        {
+            return await GetCartProducts(await _context.CartItems.Where(ci=>ci.UserId==GetUserId()).ToListAsync());
+        }
+
+        public async Task<ServiceResponse<bool>> AddToCart(CartItem cartItem)
+        {
+            cartItem.UserId = GetUserId();
+            var sameItem = await _context.CartItems
+                .FirstOrDefaultAsync(ci => ci.ProductId == cartItem.ProductId &&
+                ci.ProductTypeId == cartItem.ProductTypeId && ci.UserId == cartItem.UserId);
+            if (sameItem == null)
+            {
+                _context.CartItems.Add(cartItem);
+            }
+            else
+            {
+                sameItem.Quantity += cartItem.Quantity;
+            }
+            await _context.SaveChangesAsync();
+            return new ServiceResponse<bool>
+            {
+                Data = true,
             };
         }
     }
