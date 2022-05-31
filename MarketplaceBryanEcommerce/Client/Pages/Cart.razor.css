@@ -23,6 +23,11 @@
     text-align:right;
     color:green;
 }
+.cart-product-price-total {
+    font-weight: 700;
+    text-align: right;
+    color: green;
+}
 .btn-delete {
     background: red;
     border: none;

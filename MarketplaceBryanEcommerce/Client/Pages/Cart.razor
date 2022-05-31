@@ -18,7 +18,8 @@
 }
 else
 {
-    <div>
+    <div class="justify-content-center">
+        <br/>
         <center><h3>Carrito de Compras</h3></center>
         @foreach (var product in cartProducts)
         {
@@ -37,12 +38,31 @@ else
                 </div>
             </div>
         }
-        <div class="cart-product-price">
-            Total (@cartProducts.Count):  $@cartProducts.Sum(product =>product.Price*product.Quantity)
+        <div class="container2">
+            <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="cart-product-price-total">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Iva(19%):</td>
+                                <td>$@Math.Round(cartProducts.Sum(product =>product.Price*product.Quantity*19/100))</td>
+                            </tr>
+                            <tr>
+                                <td>Total (@cartProducts.Count): </td>
+                                <td> $@cartProducts.Sum(product =>product.Price*product.Quantity)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn-success btn">Ordenar</button>
+            </div>
+            </div>
         </div>
         <br />
         <br />
     </div>
+
 }
 
 @code {
@@ -64,7 +84,7 @@ else
     {
         await CartService.GetCartItemsCount();
         cartProducts = await CartService.GetCartProducts();
-        if (cartProducts==null || cartProducts.Count==0)
+        if (cartProducts == null || cartProducts.Count == 0)
         {
             message = "El carrito esta vacio.";
         }

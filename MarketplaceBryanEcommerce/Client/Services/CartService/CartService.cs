@@ -94,7 +94,6 @@
                 }
                 await _localStorage.SetItemAsync("cart", cart);
             }
-            await GetCartItemsCount();
         }
 
         public async Task StoreCartItems(bool emptyLoadCart)
