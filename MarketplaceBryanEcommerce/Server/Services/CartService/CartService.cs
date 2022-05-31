@@ -100,5 +100,50 @@
                 Data = true,
             };
         }
+
+        public async Task<ServiceResponse<bool>> UpdateQuatity(CartItem cartItem)
+        {
+            cartItem.UserId= GetUserId();
+            var dbcartItem = await _context.CartItems
+                .FirstOrDefaultAsync(ci => ci.ProductId == cartItem.ProductId &&
+                ci.ProductTypeId == cartItem.ProductTypeId && ci.UserId == cartItem.UserId);
+            if (dbcartItem == null)
+            {
+                return new ServiceResponse<bool> 
+                { 
+                    Data = false,
+                    Success=false,
+                    Message="El item no existe",
+                };
+            }
+            dbcartItem.Quantity = cartItem.Quantity;
+            await _context.SaveChangesAsync();
+            return new ServiceResponse<bool>
+            {
+                Data = true,
+            };
+        }
+
+        public async Task<ServiceResponse<bool>> RemoveItemFromCart(int productId, int productTypeId)
+        {
+            var dbcartItem = await _context.CartItems
+                .FirstOrDefaultAsync(ci => ci.ProductId == productId &&
+                ci.ProductTypeId == productTypeId && ci.UserId ==GetUserId());
+            if (dbcartItem == null)
+            {
+                return new ServiceResponse<bool>
+                {
+                    Data = false,
+                    Success = false,
+                    Message = "El item no existe",
+                };
+            }
+            _context.CartItems.Remove(dbcartItem);
+            await _context.SaveChangesAsync();
+            return new ServiceResponse<bool>
+            {
+                Data = true,
+            };
+        }
     }
 }
