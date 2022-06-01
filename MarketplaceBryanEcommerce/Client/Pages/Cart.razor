@@ -1,6 +1,6 @@
 ﻿@page "/cart"
 @inject ICartService CartService
-
+@inject IOrderService OrderService
 
 <PageTitle>Carrito de Compras</PageTitle>
 
@@ -15,7 +15,19 @@
             </div>
         </div>
     </container>
+}else if (orderPLaced)
+{
+    
+    <container class="container2">
+        <div class="d-flex justify-content-center h-100">
+            <div class="col-md-12 text-center">
+                <span class="display-1 d-block">Gracias por su compra!</span>
+                <span>Puede verificar su orden de compra en el panel de Ordenes <a href="/orders">aqui</a>.</span>
+            </div>
+        </div>
+    </container>
 }
+
 else
 {
     <div class="justify-content-center">
@@ -55,7 +67,7 @@ else
                         </tbody>
                     </table>
                 </div>
-                <button class="btn-success btn">Ordenar</button>
+                <button class="alert-success btn" @onclick="PlaceOrder">Ordenar</button>
             </div>
             </div>
         </div>
@@ -68,6 +80,7 @@ else
 @code {
     List<CartProductResponse>? cartProducts = null;
     string message = "Cargando productos del carrito de compras...";
+    bool orderPLaced = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -99,5 +112,12 @@ else
             e.Value = 1;
         }
         await CartService.UdpateQuantity(product);
+    }
+
+    private async Task PlaceOrder()
+    {
+        await OrderService.PlaceOrder();
+        await CartService.GetCartItemsCount();
+        orderPLaced = true;
     }
 }

@@ -1,10 +1,11 @@
 global using MarketplaceBryanEcommerce.Shared;
 global using Microsoft.EntityFrameworkCore;
 global using MarketplaceBryanEcommerce.Server.Data;
+global using MarketplaceBryanEcommerce.Server.Services.AuthService;
 global using MarketplaceBryanEcommerce.Server.Services.CartService;
 global using MarketplaceBryanEcommerce.Server.Services.CategoryService;
+global using MarketplaceBryanEcommerce.Server.Services.Order_Service;
 global using MarketplaceBryanEcommerce.Server.Services.ProductService;
-global using MarketplaceBryanEcommerce.Server.Services.AuthService;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using System.Security.Claims;
@@ -45,10 +46,11 @@ builder.Services.AddSwaggerGen();
 
 
 //Owner Services DB
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 

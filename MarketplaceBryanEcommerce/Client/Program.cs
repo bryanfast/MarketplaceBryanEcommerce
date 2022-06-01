@@ -3,6 +3,7 @@ global using System.Net.Http.Json;
 global using Blazored.LocalStorage;
 global using MarketplaceBryanEcommerce.Client.Services.CartService;
 global using MarketplaceBryanEcommerce.Client.Services.CategoryService;
+global using MarketplaceBryanEcommerce.Client.Services.Order_Service;
 global using MarketplaceBryanEcommerce.Client.Services.ProductService;
 global using MarketplaceBryanEcommerce.Client.Services.AuthService;
 global using Microsoft.AspNetCore.Components.Authorization;
@@ -21,6 +22,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();
