@@ -8,11 +8,11 @@ namespace MarketplaceBryanEcommerce.Server.Services.PaymentService
         private readonly ICartService _cartService;
         private readonly IAuthService _authService;
         private readonly IOrderService _orderService;
-        const string secret = "whsec_03f6570a92c971287302c7846332a0451b182e392a8a1fdfb69b797900715553";
+        const string secret = "";//Secret CLI STRIPE
 
         public PaymentService(ICartService cartService,IAuthService authService, IOrderService orderService)
         {
-            StripeConfiguration.ApiKey = "sk_test_51L6EOsD5vklIHPR63pMLN9nQdUHH2yJLF0FQkQf3MjOIdYnEAyEwfY2G11Mdkn5S4nhM07kr5V94FjGI10W3MGIK00UAdfqxya";
+            StripeConfiguration.ApiKey = "";//secret API STRIPE
             _cartService = cartService;
             _authService = authService;
             _orderService = orderService;
