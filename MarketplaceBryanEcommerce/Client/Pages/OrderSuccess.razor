@@ -1,0 +1,27 @@
+﻿@page "/order-success"
+@inject ICartService CartService
+@inject IOrderService OrderService
+
+<br />
+<body>
+    <container class="container">
+        <div class="d-flex justify-content-center">
+            <div class="card">
+                <center>
+                    <div class="card-body">
+                    <h3>Gracias por su compra</h3>
+                    <span>Muchas Gracias por su compra! Usted podra revisar las compras realizadas <a href="/orders">aqui.</a></span>
+                    </div>
+                    <img alt="Vuelva Pronto" class="image-wrapper" src="https://marketplacebryan.s3.us-west-2.amazonaws.com/vuelvasprontos.png" />
+                </center>
+            </div>
+        </div>
+    </container>
+</body>
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        //await OrderService.PlaceOrder();
+        await CartService.GetCartItemsCount();
+    }
+}

@@ -1,6 +1,7 @@
 ﻿@page "/cart"
 @inject ICartService CartService
 @inject IOrderService OrderService
+@inject NavigationManager NavigationManager
 
 <PageTitle>Carrito de Compras</PageTitle>
 
@@ -15,9 +16,10 @@
             </div>
         </div>
     </container>
-}else if (orderPLaced)
+}
+@*else if (orderPLaced)
 {
-    
+
     <container class="container2">
         <div class="d-flex justify-content-center h-100">
             <div class="col-md-12 text-center">
@@ -26,12 +28,12 @@
             </div>
         </div>
     </container>
-}
+}*@
 
 else
 {
     <div class="justify-content-center">
-        <br/>
+        <br />
         <center><h3>Carrito de Compras</h3></center>
         @foreach (var product in cartProducts)
         {
@@ -52,23 +54,23 @@ else
         }
         <div class="container2">
             <div class="d-flex justify-content-center h-100">
-            <div class="card">
-                <div class="cart-product-price-total">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>Iva(19%):</td>
-                                <td>$@Math.Round(cartProducts.Sum(product =>product.Price*product.Quantity*19/100))</td>
-                            </tr>
-                            <tr>
-                                <td>Total (@cartProducts.Count): </td>
-                                <td> $@cartProducts.Sum(product =>product.Price*product.Quantity)</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="card">
+                    <div class="cart-product-price-total">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Iva(19%):</td>
+                                    <td>$@Math.Round(cartProducts.Sum(product =>product.Price*product.Quantity*19/100))</td>
+                                </tr>
+                                <tr>
+                                    <td>Total (@cartProducts.Count): </td>
+                                    <td> $@cartProducts.Sum(product =>product.Price*product.Quantity)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="alert-success btn" @onclick="PlaceOrder">Ordenar</button>
                 </div>
-                <button class="alert-success btn" @onclick="PlaceOrder">Ordenar</button>
-            </div>
             </div>
         </div>
         <br />
@@ -80,7 +82,6 @@ else
 @code {
     List<CartProductResponse>? cartProducts = null;
     string message = "Cargando productos del carrito de compras...";
-    bool orderPLaced = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -116,8 +117,7 @@ else
 
     private async Task PlaceOrder()
     {
-        await OrderService.PlaceOrder();
-        await CartService.GetCartItemsCount();
-        orderPLaced = true;
+        string url = await OrderService.PlaceOrder();
+        NavigationManager.NavigateTo(url);
     }
 }

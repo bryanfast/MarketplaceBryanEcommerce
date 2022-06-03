@@ -5,6 +5,7 @@ global using MarketplaceBryanEcommerce.Server.Services.AuthService;
 global using MarketplaceBryanEcommerce.Server.Services.CartService;
 global using MarketplaceBryanEcommerce.Server.Services.CategoryService;
 global using MarketplaceBryanEcommerce.Server.Services.Order_Service;
+global using MarketplaceBryanEcommerce.Server.Services.PaymentService;
 global using MarketplaceBryanEcommerce.Server.Services.ProductService;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -51,6 +52,7 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 var app = builder.Build();
 
