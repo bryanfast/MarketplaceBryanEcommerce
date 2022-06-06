@@ -2,6 +2,7 @@
 @inject ICartService CartService
 @inject IOrderService OrderService
 @inject NavigationManager NavigationManager
+@inject IJSRuntime _jsRuntime
 
 <PageTitle>Carrito de Compras</PageTitle>
 
@@ -35,6 +36,7 @@ else
     <div class="justify-content-center">
         <br />
         <center><h3>Carrito de Compras</h3></center>
+
         @foreach (var product in cartProducts)
         {
             <div class="container">
@@ -69,7 +71,24 @@ else
                             </tbody>
                         </table>
                     </div>
-                    <button class="alert-success btn" @onclick="PlaceOrder">Ordenar</button>
+                    @*<button class="alert-success btn" @onclick="PlaceOrder">Ordenar</button>*@
+                    <script suppress-error="BL9992"
+                        src="https://checkout.epayco.co/checkout.js"
+                        class="epayco-button"
+                        data-epayco-key="491d6a0b6e992cf924edd8d3d088aff1"
+                        data-epayco-amount=@Math.Round(cartProducts.Sum(product =>product.Price*product.Quantity)*4000)
+                        data-epayco-name="Compra Marketplace Bryan"
+                        data-epayco-description=""
+                        data-epayco-currency="cop"
+                        data-epayco-country="co"
+                        data-epayco-test="true"
+                        data-epayco-external="false"
+                        data-epayco-response="https://ejemplo.com/respuesta.html"
+                        data-epayco-confirmation="https://ejemplo.com/confirmacion"
+                        data-epayco-methodconfirmation="get"
+                        data-epayco-button="https://www.copiworld.com.ar/images/pagar/boton-pagar-copiworld.png">
+                        
+                    </script>
                 </div>
             </div>
         </div>
@@ -77,9 +96,21 @@ else
         <br />
     </div>
 
+
+    <form>
+    </form>
+
 }
 
+
 @code {
+
+    public void LlamarJavaScritp()
+    {
+        _jsRuntime.InvokeVoidAsync("MostrarAlerta", "Estos es un mensaje en C#");
+    }
+
+
     List<CartProductResponse>? cartProducts = null;
     string message = "Cargando productos del carrito de compras...";
 
