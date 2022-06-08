@@ -1,6 +1,7 @@
 global using MarketplaceBryanEcommerce.Shared;
 global using Microsoft.EntityFrameworkCore;
 global using MarketplaceBryanEcommerce.Server.Data;
+global using MarketplaceBryanEcommerce.Server.Services.AddressService;
 global using MarketplaceBryanEcommerce.Server.Services.AuthService;
 global using MarketplaceBryanEcommerce.Server.Services.CartService;
 global using MarketplaceBryanEcommerce.Server.Services.CategoryService;
@@ -47,6 +48,7 @@ builder.Services.AddSwaggerGen();
 
 
 //Owner Services DB
+builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();

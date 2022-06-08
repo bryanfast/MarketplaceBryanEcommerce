@@ -1,0 +1,35 @@
+﻿.card-edit {
+    height: 600px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 500px;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+.card-address {
+    height: 220px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 500px;
+    background-color: rgba(0,0,0,0.5);
+    border-radius:5px;
+}
+
+.card-header {
+    color: white;
+}
+
+.card-body {
+    color: white;
+}
+
+
+.container {
+    height: 100%;
+    align-content: center;
+}
+
+.title-profile {
+    margin-top: auto;
+    color: blue;
+}

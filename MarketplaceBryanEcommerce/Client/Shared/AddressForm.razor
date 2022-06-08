@@ -1,0 +1,102 @@
+﻿@inject IAddressService AddressService
+
+
+@if (address == null && !editAddress)
+{
+    <center>
+        <span>
+            Tiene que especificar una direccion de envio.
+            <button class="btn btn-link" @onclick="InitAddress">Agregar una direccion?</button>
+        </span>
+    </center>
+}
+else if (!editAddress)
+{
+    <container class="container">
+        <div class="d-flex justify-content-center">
+            <div class="card-address">
+                <div class="card-header">
+                    <center><h5>Direccion de Envio</h5></center>
+                </div>
+                <div class="card-body">
+                    <center>
+                    <span>@address.FirstName @address.LastName</span><br />
+                    <span>@address.Street</span><br />
+                    <span>@address.City, @address.State, @address.Zip</span><br />
+                    <span>@address.Country</span><br/>
+                    <button class="btn btn-primary" @onclick="EditAdress">Editar</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </container>
+}
+else
+{
+    <EditForm Model="address" OnSubmit="SubmitAdress">
+        <container class="container">
+            <div class="d-flex justify-content-center h-100">
+                <div class="card-edit">
+                                    <div class="card-header">
+                    <center><h5>Direccion de Envio</h5></center>
+                </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="firstname">Nombres</label>
+                            <InputText id="firstname" @bind-Value="address.FirstName" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastname">Apellidos</label>
+                            <InputText id="lastname" @bind-Value="address.LastName" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="street">Calle</label>
+                            <InputText id="street" @bind-Value="address.Street" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="city">Ciudad</label>
+                            <InputText id="city" @bind-Value="address.City" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="state">Departamento</label>
+                            <InputText id="state" @bind-Value="address.State" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="country">Pais</label>
+                            <InputText id="country" @bind-Value="address.Country" class="form-control" />
+                        </div>
+                        <center><button type="submit" class="btn btn-primary">Guardar</button></center>
+                    </div>
+                </div>
+            </div>
+        </container>
+
+    </EditForm>
+}
+
+@code {
+    Address address = null;
+    bool editAddress = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        address = await AddressService.GetAddress();
+    }
+
+    private async Task SubmitAdress()
+    {
+        editAddress = false;
+        address = await AddressService.AddOrUpdateAddress(address);
+    }
+
+    private void InitAddress()
+    {
+        address = new Address();
+        editAddress = true;
+    }
+
+    private void EditAdress()
+    {
+        editAddress = true;
+    }
+}
