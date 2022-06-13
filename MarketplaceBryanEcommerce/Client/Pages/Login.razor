@@ -50,7 +50,10 @@
         var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
         if(QueryHelpers.ParseQuery(uri.Query).TryGetValue("returnUrl",out var url))
         {
-            returnUrl = url;
+            if (url != "register")
+            {
+                returnUrl = url;
+            }
         }
     }
 
