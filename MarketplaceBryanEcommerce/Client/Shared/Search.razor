@@ -36,7 +36,10 @@
     //Boton Search
     public void SearchProducts()
     {
-        NavigationManager.NavigateTo($"search/{searchText}/1");
+        if (searchText != "" && searchText!=null)
+        {
+            NavigationManager.NavigateTo($"search/{searchText}/1");
+        }
     }
     // Busqueda de sugerencias
     public async Task HandleSearch(KeyboardEventArgs args)
