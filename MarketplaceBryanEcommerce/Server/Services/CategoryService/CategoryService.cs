@@ -9,18 +9,77 @@
             _context = context;
         }
 
-        public async Task<ServiceResponse<List<Category>>> GetCategories()
+        public async Task<ServiceResponse<List<Category>>> AddCategory(Category category)
+        {
+            category.Editing = category.IsNew = false;
+            _context.Categories.Add(category);
+            await _context.SaveChangesAsync();
+            return await GetAdminCategories();
+
+        }
+
+        public async Task<ServiceResponse<List<Category>>> DeleteCategory(int categoryId)
+        {
+            Category category = await GetCategoryById(categoryId);
+            if (category == null)
+            {
+                return new ServiceResponse<List<Category>>
+                {
+                    Success = false,
+                    Message = "No se pudo encontrar la categoria",
+                };
+            }
+
+            category.Deleted = true;
+            await _context.SaveChangesAsync();
+            return await GetAdminCategories();
+
+
+        }
+
+        public async Task<ServiceResponse<List<Category>>> GetAdminCategories()
         {
             var response = new ServiceResponse<List<Category>>
             {
-                Data = await _context.Categories.ToListAsync()
+                Data = await _context.Categories
+                .Where(c => !c.Deleted)
+                .ToListAsync()
             };
             return response;
         }
 
-        public Task<ServiceResponse<Category>> GetCategory(int categoryId)
+        public async Task<ServiceResponse<List<Category>>> GetCategories()
         {
-            throw new NotImplementedException();
+            var response = new ServiceResponse<List<Category>>
+            {
+                Data = await _context.Categories
+                .Where(c => !c.Deleted && c.Visible)
+                .ToListAsync()
+            };
+            return response;
+        }
+
+        private async Task<Category> GetCategoryById(int categoryId)
+        {
+            return await _context.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
+        }
+
+        public async Task<ServiceResponse<List<Category>>> UpdateCategory(Category category)
+        {
+            var dbCategory = await GetCategoryById(category.Id);
+            if (dbCategory == null)
+            {
+                return new ServiceResponse<List<Category>>
+                {
+                    Success = false,
+                    Message = "No se pudo encontrar la categoria",
+                };
+            }
+            dbCategory.Name = category.Name;
+            dbCategory.Url = category.Url;
+            dbCategory.Visible = category.Visible;
+            await _context.SaveChangesAsync();
+            return await GetAdminCategories();
         }
     }
 }
