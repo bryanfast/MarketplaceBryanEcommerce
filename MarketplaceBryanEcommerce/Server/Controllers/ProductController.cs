@@ -59,5 +59,12 @@ namespace MarketplaceBryanEcommerce.Server.Controllers
             return Ok(result);
         }
 
+        [HttpGet("admin"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> GetAdminCategories()
+        {
+            var result = await _productService.GetAdminProducts();
+            return Ok(result);
+        }
+
     }
 }

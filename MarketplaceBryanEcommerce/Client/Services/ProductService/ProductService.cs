@@ -12,12 +12,12 @@ namespace MarketplaceBryanEcommerce.Client.Services.ProductService
         }
         public event Action ProductsChanged;
         public List<Product> Products { get; set; } = new List<Product>();
+        public List<Product> AdminProducts { get; set; } = new List<Product>();
         public string Message { get; set; }= "Cargando Productos";
 
         public int CurrentPage { get; set; } = 1;
         public int PageCount {  get; set; } = 0;
         public string LastSearch { get; set; } = string.Empty;
-        public List<Product> AdminProducts { get; set; } = new List<Product>();
 
         public async  Task<ServiceResponse<Product>> GetProduct(int productId)
         {

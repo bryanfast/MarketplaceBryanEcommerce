@@ -15,7 +15,9 @@
             {
                 Data = await _context.Products
                 .Where(p => !p.Deleted)
-                .Include(p => p.Variants.Where(v => v.Visible && !v.Deleted)).ToListAsync()
+                .Include(p => p.Variants.Where(v => v.Visible && !v.Deleted))
+                .ThenInclude(v => v.ProductType)
+                .ToListAsync()
                  };
             return response;
         }
