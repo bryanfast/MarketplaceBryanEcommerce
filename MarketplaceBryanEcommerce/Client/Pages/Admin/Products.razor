@@ -1,0 +1,41 @@
+﻿@page "/admin/products"
+@inject IProductService ProductService
+@attribute [Authorize(Roles = "Admin")]
+<center>
+    <h3>Products</h3>
+</center>
+
+@if (ProductService.AdminProducts == null)
+{
+    <center>
+        <span>Loading Products...</span>
+    </center>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Producto</th>
+                <th>Variante</th>
+                <th>Precio</th>
+                <th>Visible</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+}
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await ProductService.GetAdminProducts();
+    }
+
+    void EditProduct(int productId)
+    {
+
+    }
+
+}

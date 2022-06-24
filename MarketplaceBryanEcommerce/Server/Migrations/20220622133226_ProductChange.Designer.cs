@@ -4,6 +4,7 @@ using MarketplaceBryanEcommerce.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketplaceBryanEcommerce.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220622133226_ProductChange")]
+    partial class ProductChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -334,17 +336,11 @@ namespace MarketplaceBryanEcommerce.Server.Migrations
                     b.Property<int>("ProductTypeId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
                     b.Property<decimal>("OriginalPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("Visible")
-                        .HasColumnType("bit");
 
                     b.HasKey("ProductId", "ProductTypeId");
 
@@ -357,64 +353,50 @@ namespace MarketplaceBryanEcommerce.Server.Migrations
                         {
                             ProductId = 1,
                             ProductTypeId = 2,
-                            Deleted = false,
                             OriginalPrice = 200.00m,
-                            Price = 99.99m,
-                            Visible = true
+                            Price = 99.99m
                         },
                         new
                         {
                             ProductId = 1,
                             ProductTypeId = 3,
-                            Deleted = false,
                             OriginalPrice = 2000.00m,
-                            Price = 999.99m,
-                            Visible = true
+                            Price = 999.99m
                         },
                         new
                         {
                             ProductId = 2,
                             ProductTypeId = 2,
-                            Deleted = false,
                             OriginalPrice = 19.99m,
-                            Price = 9.99m,
-                            Visible = true
+                            Price = 9.99m
                         },
                         new
                         {
                             ProductId = 3,
                             ProductTypeId = 2,
-                            Deleted = false,
                             OriginalPrice = 19.99m,
-                            Price = 9.99m,
-                            Visible = true
+                            Price = 9.99m
                         },
                         new
                         {
                             ProductId = 4,
                             ProductTypeId = 4,
-                            Deleted = false,
                             OriginalPrice = 19.99m,
-                            Price = 9.99m,
-                            Visible = true
+                            Price = 9.99m
                         },
                         new
                         {
                             ProductId = 4,
                             ProductTypeId = 5,
-                            Deleted = false,
                             OriginalPrice = 19.99m,
-                            Price = 10.00m,
-                            Visible = true
+                            Price = 10.00m
                         },
                         new
                         {
                             ProductId = 5,
                             ProductTypeId = 6,
-                            Deleted = false,
                             OriginalPrice = 19.99m,
-                            Price = 9.99m,
-                            Visible = true
+                            Price = 9.99m
                         });
                 });
 

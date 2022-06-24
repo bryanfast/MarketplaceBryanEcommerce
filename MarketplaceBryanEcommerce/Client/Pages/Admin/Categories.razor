@@ -2,8 +2,8 @@
 @inject ICategoryService CategoryService
 @attribute [Authorize(Roles ="Admin")]
 @implements IDisposable
-
-<center><h3>Categories</h3></center>
+<br/>
+<center><h3>Categorias</h3>
 <div class="header">
     <div class="col">Nombre</div>
     <div class="col">Url</div>
@@ -63,6 +63,9 @@
 <button class="btn btn-primary" @onclick="CreateNewCategory">
     <i class="oi oi-plus"></i> Agregar nueva categoria
 </button>
+</center>
+
+<br/>
 @code {
     Category editingCategory = null;
 
