@@ -5,7 +5,7 @@
 
 .row{
     display:flex;
-    padding:6px;
+    padding:8px;
 }
 
 .col{
@@ -23,4 +23,9 @@
 
 .col-visible{
     text-align:center;
+}
+
+.text-bryan{
+    padding-left:30px;
+    padding-right:30px;
 }

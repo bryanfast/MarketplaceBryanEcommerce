@@ -4,6 +4,7 @@
 @inject IProductTypeService ProductTypeService
 @inject ICategoryService CategoryService
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 @if (loading)
 {
@@ -12,9 +13,10 @@
 else
 
 {
+    <br/>
     @if (product.Editing)
     {
-        <h3>Editar "@product.Title"</h3>
+        <center><h3>Editar "@product.Title"</h3></center>
     }
     else if (product.IsNew)
     {
@@ -22,18 +24,18 @@ else
     }
         <EditForm Model="product" OnValidSubmit="AddOrUpdateProduct">
             <DataAnnotationsValidator></DataAnnotationsValidator>
-            <div class="mb-0">
+            <div class="mb-0 text-bryan">
                 <label for="title">Titulo</label>
                 <InputText id="title" @bind-Value="product.Title" class="form-control"></InputText>
             </div>
-            <div class="mb-0">
+            <div class="mb-0 text-bryan">
                 <label for="imgUrl">Url de la Imagen</label>
                 <InputText id="imgUrl" @bind-Value="product.ImageUrl" class="form-control"></InputText>
             </div>
-            <div class="mb-0">
+            <div class="mb-0 text-bryan">
                 <img src="@product.ImageUrl"/>
             </div>
-            <div class="mb-0">
+            <div class="mb-0 text-bryan">
                 <label for="description">Descripción</label>
                 <InputText id="description" @bind-Value="product.Description" class="form-control"></InputText>
             </div>
@@ -52,52 +54,66 @@ else
                         <InputSelect disabled="@variant.Deleted" @bind-Value="variant.ProductTypeId" class="form-control">
                             @foreach(var productType in ProductTypeService.ProductTypes)
                             {
-                                <option value="@productType.Id.ToString()">producType.Name</option>
+                                <option value="@productType.Id.ToString()">@productType.Name</option>
                             }
                         </InputSelect>
                     </div>
                     <div class="col">
-                        <InputNumber @bind-Value="variant.Price" class="form-control" disable="@variant.Deleted"></InputNumber>
+                        <InputNumber @bind-Value="variant.Price" class="form-control" disabled="@variant.Deleted"></InputNumber>
                     </div>
                     <div class="col">
-                        <InputNumber @bind-Value="variant.OriginalPrice" class="form-control" disable="@variant.Deleted"></InputNumber>
+                        <InputNumber @bind-Value="variant.OriginalPrice" class="form-control" disabled="@variant.Deleted"></InputNumber>
                     </div>
                     <div class="col col-visible">
-                        <InputCheckbox @bind-Value="variant.Visible" class="form-control" style="transform:scale(1.5,1.5);" disable="@variant.Deleted"></InputCheckbox>
+                        <InputCheckbox @bind-Value="variant.Visible" class="form-check-input" style="transform:scale(1.5,1.5);" disabled="@variant.Deleted"></InputCheckbox>
                     </div>
                     <div class="col">
-                        <button class="btn btn-primary" disabled="@variant.Deleted" @onclick="@(()=>RemoveVariant(variant.ProductTypeId))">
+                        <button type="button" class="btn btn-primary" disabled="@variant.Deleted" @onclick="@(()=>RemoveVariant(variant.ProductTypeId))">
                             <i class="oi oi-trash"></i>
                         </button>
                     </div>
                 </div>
             }
-            <button class="btn btn-primary" @onclick="AddVariant">
-                <i class="oi oi-plus"></i> Agregar Variante
-            </button>
+            <div class="text-bryan">
+                <button type="button" class="btn btn-primary" @onclick="AddVariant">
+                                <i class="oi oi-plus"></i> Agregar Variante
+                 </button>
+            </div>
+            
             <hr/>
-            <div class="mb-0">
+            <div class="mb-0 text-bryan">
                 <label for="category">Categoria</label>
                 <InputSelect id="category" @bind-Value="product.CategoryId" class="form-control">
                     @foreach(var category in CategoryService.AdminCategories)
                     {
-                        <option value="@category.Id">category.Name</option>
+                        <option value="@category.Id">@category.Name</option>
                     }
                 </InputSelect>
             </div>
+            <div class="text-bryan">
             <div class="form-check">
-                <InputCheckbox id="featured" @bind-Value="product.Featured" class="form-check-input"></InputCheckbox>
+                <InputCheckbox style="transform:scale(1.5,1.5);" id="featured" @bind-Value="product.Featured" class="form-check-input"></InputCheckbox>
                 <label for="featured" class="form-check-label">Producto Destacado</label>
             </div>
             <div class="form-check">
-                <InputCheckbox id="visible" @bind-Value="product.Visible" class="form-check-input"></InputCheckbox>
+                <InputCheckbox style="transform:scale(1.5,1.5);" id="visible" @bind-Value="product.Visible" class="form-check-input"></InputCheckbox>
                 <label for="visible" class="form-check-label">Visible</label>
             </div>
+            </div>
             <hr/>
-            <button type="submit" class="btn btn-primary">@btnText</button>
+            <center><button type="submit" class="btn btn-primary">@btnText</button></center>
             <ValidationSummary></ValidationSummary>
+
         </EditForm>
-    
+        <br/>
+        @if (!product.IsNew)
+        {
+            <center>
+                <button type="button" class="btn btn-danger" @onclick="DeleteProduct">
+                    Eliminar Producto
+                </button>
+            </center>
+        }
 }
 
 @code {
@@ -172,5 +188,15 @@ else
             product = await ProductService.UpdateProduct(product);
             NavigationManager.NavigateTo($"admin/product/{product.Id}", true);
         }
+    }
+    async void DeleteProduct()
+    {
+        bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", $"Usted realmente desea borrar '{product.Title}'?");
+        if (confirmed)
+        {
+            await ProductService.DeleteProduct(product);
+            NavigationManager.NavigateTo("admin/products");
+        }
+
     }
 }
