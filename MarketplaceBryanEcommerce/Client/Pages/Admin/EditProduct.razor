@@ -24,20 +24,36 @@ else
     }
         <EditForm Model="product" OnValidSubmit="AddOrUpdateProduct">
             <DataAnnotationsValidator></DataAnnotationsValidator>
-            <div class="mb-0 text-bryan">
+            <div class="text-bryan">
                 <label for="title">Titulo</label>
                 <InputText id="title" @bind-Value="product.Title" class="form-control"></InputText>
             </div>
-            <div class="mb-0 text-bryan">
+            <div class="text-bryan">
                 <label for="imgUrl">Url de la Imagen</label>
                 <InputText id="imgUrl" @bind-Value="product.ImageUrl" class="form-control"></InputText>
             </div>
             <div class="mb-0 text-bryan">
-                <img src="@product.ImageUrl"/>
+            @if (!string.IsNullOrEmpty(product.ImageUrl))
+            {
+                <img class="img" src="@product.ImageUrl"/>
+            }
+            else
+            {
+                foreach(var image in product.Images)
+                {
+                    <img src="@image.Data"/>
+                    <button type="button" @onclick="(()=>RemoveImage(image.Id))">Eliminar</button>
+                }
+            }
+
+            </div>
+            <br/>
+            <div class="text-bryan">
+                <InputFile id="images" OnChange="OnFileChange" multiple class="form-control"></InputFile>
             </div>
             <div class="mb-0 text-bryan">
                 <label for="description">Descripción</label>
-                <InputText id="description" @bind-Value="product.Description" class="form-control"></InputText>
+                <InputTextArea id="description" @bind-Value="product.Description" class="form-control"></InputTextArea>
             </div>
             <hr/>
             <div class="header">
@@ -47,6 +63,7 @@ else
                 <div class="col">Visible</div>
                 <div class="col"></div>
             </div>
+            <div class="text-bryan">
             @foreach(var variant in product.Variants)
             {
                 <div class="row">
@@ -74,6 +91,7 @@ else
                     </div>
                 </div>
             }
+            </div>
             <div class="text-bryan">
                 <button type="button" class="btn btn-primary" @onclick="AddVariant">
                                 <i class="oi oi-plus"></i> Agregar Variante
@@ -90,15 +108,12 @@ else
                     }
                 </InputSelect>
             </div>
+            <br/>
             <div class="text-bryan">
-            <div class="form-check">
                 <InputCheckbox style="transform:scale(1.5,1.5);" id="featured" @bind-Value="product.Featured" class="form-check-input"></InputCheckbox>
                 <label for="featured" class="form-check-label">Producto Destacado</label>
-            </div>
-            <div class="form-check">
                 <InputCheckbox style="transform:scale(1.5,1.5);" id="visible" @bind-Value="product.Visible" class="form-check-input"></InputCheckbox>
                 <label for="visible" class="form-check-label">Visible</label>
-            </div>
             </div>
             <hr/>
             <center><button type="submit" class="btn btn-primary">@btnText</button></center>
@@ -198,5 +213,26 @@ else
             NavigationManager.NavigateTo("admin/products");
         }
 
+    }
+
+    async Task OnFileChange(InputFileChangeEventArgs e)
+    {
+        var format = "image/png";
+        foreach(var image in e.GetMultipleFiles(int.MaxValue))
+        {
+            var resizedImage = await image.RequestImageFileAsync(format, 200, 200);
+            var buffer = new byte[resizedImage.Size];
+            await resizedImage.OpenReadStream().ReadAsync(buffer);
+            var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+            product.Images.Add(new Image { Data = imageData });
+        }
+    }
+    void RemoveImage(int id)
+    {
+        var image = product.Images.FirstOrDefault(i => i.Id == id);
+        if (image != null)
+        {
+            product.Images.Remove(image);
+        }
     }
 }
