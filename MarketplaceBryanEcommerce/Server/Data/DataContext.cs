@@ -20,7 +20,7 @@ namespace MarketplaceBryanEcommerce.Server.Data
             );
 
             modelBuilder.Entity<ProductType>().HasData(
-                new ProductType { Id = 1, Name = "Defautl" },
+                new ProductType { Id = 1, Name = "Default" },
                 new ProductType { Id = 2, Name = "HD" },
                 new ProductType { Id = 3, Name = "FHD" },
                 new ProductType { Id = 4, Name = "Dulces" },

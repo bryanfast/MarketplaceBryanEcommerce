@@ -32,20 +32,31 @@ else
                 <label for="imgUrl">Url de la Imagen</label>
                 <InputText id="imgUrl" @bind-Value="product.ImageUrl" class="form-control"></InputText>
             </div>
-            <div class="mb-0 text-bryan">
-            @if (!string.IsNullOrEmpty(product.ImageUrl))
-            {
-                <img class="img" src="@product.ImageUrl"/>
-            }
-            else
-            {
-                foreach(var image in product.Images)
+            <div class="card-img">
+                @if (!string.IsNullOrEmpty(product.ImageUrl))
                 {
-                    <img src="@image.Data"/>
-                    <button type="button" @onclick="(()=>RemoveImage(image.Id))">Eliminar</button>
+                    <img class="img" src="@product.ImageUrl"/>
                 }
-            }
-
+                else
+                {
+                    foreach(var image in product.Images)
+                    {
+                        @*<img src="@image.Data"/>
+                        <button type="button" @onclick="(()=>RemoveImage(image.Id))">Eliminar</button>*@
+                        <MudCard Class="ma-1">
+                            <MudCardContent>
+                                <MudImage Src="@image.Data"/>
+                            </MudCardContent>
+                            <MudCardActions Style="justify-content:center;">
+                                <MudButton Variant="Variant.Filled"
+                                Color="Color.Error"
+                                OnClick="@(()=>RemoveImage(image.Id))">
+                                Eliminar
+                                </MudButton>
+                            </MudCardActions>
+                        </MudCard>
+                    }
+                }
             </div>
             <br/>
             <div class="text-bryan">
